@@ -1,7 +1,10 @@
 /*
-Given a binary tree, return the preorder traversal of its nodes' values.
+Easy Binary Tree Postorder Traversal Show Result My Submissions
 
-Note
+11% Accepted
+Given a binary tree, return the postorder traversal of its nodes' values.
+
+Example
 Given binary tree {1,#,2,3},
 
    1
@@ -11,9 +14,7 @@ Given binary tree {1,#,2,3},
    3
  
 
-return [1,2,3].
-
-
+return [3,2,1].
 */
 public class Solution {
     /**
