@@ -47,3 +47,46 @@ public class Solution {
         return false;
     }
 }
+
+
+
+// Careful about the MaxLength improvement
+
+public class Solution {
+    /**
+     * @param s: A string s
+     * @param dict: A dictionary of words dict
+     */
+    public boolean wordSegmentation(String s, Set<String> dict) {
+        // write your code here   
+        if (s == null || dict == null || dict.size() == 0) {
+            return false;
+        }
+        if (s.length() == 0) {
+            return true;
+        }
+        int maxLength = getMaxLength(dict);
+        boolean[] dp = new boolean[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            if (dict.contains(s.substring(0, i + 1))) {
+                dp[i] = true;
+                continue;
+            }
+            for (int j = i - 1;(i - j) <= maxLength && j >= 0; j--) {
+                if (dp[j] == true && dict.contains(s.substring(j + 1, i + 1))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length() - 1];
+    }
+    
+    private int getMaxLength(Set<String> dict) {
+        int max = 0;
+        for (String word : dict) {
+            max = Math.max(max, word.length());
+        }
+        return max;
+    }
+}
