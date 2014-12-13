@@ -26,7 +26,7 @@
     
     
     
-    class Trie {
+ class Trie {
         public TrieNode root;
         
         public Trie() {
