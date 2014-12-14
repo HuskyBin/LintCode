@@ -41,19 +41,22 @@ public class Solution {
      * @param m: An integer m denotes the size of a backpack
      * @param A: Given n items with size A[i]
      */
-    public int backPack(int m, ArrayList<Integer> A) {
+    public int backPack(int m, int[] A) {
         // write your code here
-        if (m <= 0 || A == null || A.size() == 0) {
+        if (m <= 0 || A == null || A.length == 0) {
             return 0;
         }
-        int[] dp = new int[m + 1];
-        for (int i = 0; i <= A.size(); i++) {
-            for (int j = m; j >= 0; j--) {
-                if (i > 0 && j >= A.get(i - 1)) {
-                    dp[j] = Math.max(dp[j], dp[j - A.get(i - 1)] + A.get(i - 1));
+        int[][] dp = new int[A.length + 1][m + 1];
+        for (int i = 0; i <= A.length; i++) {
+            for (int j = 0; j <= m; j++) {
+                if (i > 0) {
+                    dp[i][j] = dp[i - 1][j];
+                    if (j >= A[i - 1]) {
+                        dp[i][j] = Math.max(dp[i][j], (dp[i - 1][j - A[i - 1]] + A[i - 1]));
+                    }
                 }
             }
         }
-        return dp[m];
+        return dp[A.length][m];
     }
 }
