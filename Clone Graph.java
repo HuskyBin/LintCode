@@ -57,3 +57,44 @@ public class Solution {
         return copyNode;
     }
 }
+
+
+// BFS
+
+public class Solution {
+    /**
+     * @param node: A undirected graph node
+     * @return: A undirected graph node
+     */
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        // write your code here
+        if (node == null) {
+            return node;
+        }
+        Map<Integer, UndirectedGraphNode> map = new HashMap<>();
+        UndirectedGraphNode copyRoot = new UndirectedGraphNode(node.label);
+        map.put(node.label, copyRoot);
+        Queue<UndirectedGraphNode> queue = new LinkedList<>();
+        
+        queue.offer(node);
+        while (!queue.isEmpty()) {
+            UndirectedGraphNode curNode = queue.poll();
+            UndirectedGraphNode copyNode = map.get(curNode.label);
+            ArrayList<UndirectedGraphNode> neighbors = curNode.neighbors;
+            for (UndirectedGraphNode neighborNode : neighbors) {
+                UndirectedGraphNode copyNeighbor = null;
+                if (map.containsKey(neighborNode.label)) {
+                    copyNeighbor = map.get(neighborNode.label);
+                }
+                else {
+                    queue.offer(neighborNode);
+                    copyNeighbor = new UndirectedGraphNode(neighborNode.label);
+                    map.put(neighborNode.label, copyNeighbor);
+                }
+                copyNode.neighbors.add(copyNeighbor);
+
+            }
+        }
+        return copyRoot;
+    }
+}
