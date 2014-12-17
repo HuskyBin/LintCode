@@ -45,6 +45,7 @@ class Solution {
     }
 };
 
+// 解释http://www.quora.com/What-are-some-fast-algorithms-for-computing-the-nth-power-of-a-number
 // for-loop method
 class Solution {
 public:
