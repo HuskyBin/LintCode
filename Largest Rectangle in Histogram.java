@@ -37,3 +37,30 @@ public class Solution {
         return max;
     }
 }
+
+
+// naive solution
+public class Solution {
+    /**
+     * @param height: A list of integer
+     * @return: The area of largest rectangle in the histogram
+     */
+    public int largestRectangleArea(int[] height) {
+        // write your code here
+        if (height == null || height.length == 0) {
+            return 0;
+        }
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < height.length; i++) {
+            if (i < height.length -1 && height[i] <= height[i + 1]) {
+                continue;
+            }
+            int min = Integer.MAX_VALUE;
+            for (int j = i; j >= 0; j--) {
+                min = Math.min(min, height[j]);
+                max = Math.max(max, min * (i - j + 1));
+            }
+        }
+        return max;
+    }
+}
