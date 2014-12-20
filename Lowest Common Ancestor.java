@@ -79,3 +79,71 @@ public class Solution {
         return coverNode(root.left, A) || coverNode(root.right, A);
     }
 }
+
+
+// O(n)
+
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+public class Solution {
+    /**
+     * @param root: The root of the binary search tree.
+     * @param A and B: two nodes in a Binary.
+     * @return: Return the least common ancestor(LCA) of the two nodes.
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode A, TreeNode B) {
+        // write your code here
+        if (root == null || A == null || B == null) {
+            return null;
+        }
+        if (!coverNode(root, A) && !coverNode(root, B)) {
+            return null;
+        }
+        return findCommonAncestor(root, A, B);
+    }
+    
+    private TreeNode findCommonAncestor(TreeNode root, TreeNode A, TreeNode B) {
+        if (root == null) {
+            return null;
+        }
+        if (root == A && root == B) {
+            return root;
+        }
+        TreeNode left = findCommonAncestor(root.left, A, B);
+        if (left != null && left != A && left != B) {
+            return left;
+        }
+        TreeNode right = findCommonAncestor(root.right, A, B);
+        if (right != null && right != A && right != B) {
+            return right;
+        }
+        if (left != null && right != null) {
+            return root;
+        }
+        else if (root == A || root == B) {
+            return root;
+        }
+        else {
+            return left == null ? right : left;
+        }
+    }
+    
+    private boolean coverNode(TreeNode root, TreeNode A) {
+        if (root == null) {
+            return false;
+        }
+        if (root == A) {
+            return true;
+        }
+        return coverNode(root.left, A) || coverNode(root.right, A);
+    }
+}
