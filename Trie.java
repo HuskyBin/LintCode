@@ -64,6 +64,7 @@
                 if (current.findSubNode(ch) == null) {
                     TrieNode newNode = new TrieNode(ch);
                     current.subNode.add(newNode);
+                    current.count += 1;
                     current = newNode;
                 }
                 else {
