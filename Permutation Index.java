@@ -41,3 +41,33 @@ public class Solution {
     }
     
 }
+
+
+//Best Solution
+// NO extra Space need 
+public class Solution {
+    /**
+     * @param A an integer array
+     * @return a long integer
+     */
+    public long permutationIndex(int[] A) {
+        // Write your code here
+        if (A == null || A.length == 0) {
+            return 0;
+        }
+        long factor = 1;
+        long sum = 1;
+        for (int i = A.length - 1; i >= 0; i--) {
+            int count = 0;
+            for (int j = i + 1; j < A.length; j++) {
+                if (A[j] < A[i]) {
+                    count++;
+                }
+            }
+            sum += count * factor;
+            factor *= (A.length - i);
+        }
+        
+        return sum;
+    }
+}
